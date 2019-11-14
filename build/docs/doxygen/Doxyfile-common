@@ -1,0 +1,81 @@
+PROJECT_NAME           = Gromacs
+@INCLUDE               = Doxyfile-version
+LAYOUT_FILE            = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/docs/doxygen/DoxygenLayout.xml
+INPUT                  = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/docs/doxygen \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/share/template
+FILE_PATTERNS          = *.c *.cpp *.h *.md
+# CUDA files could be included like this, but currently produce a lot of
+# warnings.
+# FILE_PATTERNS         += *.cu *.cuh
+EXAMPLE_PATH           = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta
+RECURSIVE              = YES
+EXCLUDE                = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/contrib \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/external \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/selection/parser.cpp \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/selection/parser.h \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/selection/scanner.cpp  \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_adress_c \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_avx_128_fma_double \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_avx_128_fma_single \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_avx_256_double \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_avx_256_single \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_sparc64_hpc_ace_double \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_sse2_double \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_sse2_single \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_sse4_1_double \
+                         /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src/gromacs/gmxlib/nonbonded/nb_kernel_sse4_1_single
+EXCLUDE_SYMBOLS        = YY* yy* _gmx_sel_yy*
+EXCLUDE_SYMBOLS       += __STDC*
+EXCLUDE_SYMBOLS       += TEST TEST_F TEST_P TYPED_TEST_CASE TYPED_TEST INSTANTIATE_TEST_CASE_P
+EXCLUDE_SYMBOLS       += MOCK_METHOD* MOCK_CONST_METHOD*
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta
+STRIP_FROM_INC_PATH    = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src
+INCLUDE_PATH           = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/src
+HAVE_DOT               = YES
+DOT_PATH               = /usr/bin
+MSCGEN_PATH            = 
+DOTFILE_DIRS           = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/docs/doxygen/depgraphs
+
+
+ENABLED_SECTIONS       = 
+
+MACRO_EXPANSION        = YES
+# Extract documentation also for code in headers within #ifdef __cplusplus
+PREDEFINED             = __cplusplus
+# This is for cases where \cond does not work, so that #ifndef can also be used.
+# thread_mpi also uses this, but it is now excluded from the documentation.
+PREDEFINED            += DOXYGEN
+# This makes 'static gmx_inline' functions appear better in the documentation.
+PREDEFINED            += gmx_inline=inline
+# This is for parser.cpp to make it produce code that Doxygen understands
+# and that does not have unnecessary function declarations.
+PREDEFINED            += __STDC__ YYMALLOC=malloc YYFREE=free
+
+JAVADOC_AUTOBRIEF      = YES
+BUILTIN_STL_SUPPORT    = YES
+INLINE_INHERITED_MEMB  = YES
+SORT_BY_SCOPE_NAME     = YES
+ALPHABETICAL_INDEX     = YES
+HTML_DYNAMIC_SECTIONS  = YES
+GENERATE_LATEX         = NO
+# Setting this to NO has a side effect to hide undocumented headers from the
+# file list, which makes it generally look nicer.
+VERBATIM_HEADERS       = NO
+STRIP_CODE_COMMENTS    = NO
+
+EXTRACT_LOCAL_CLASSES  = NO
+# This includes 'static inline' functions from headers in the documentation.
+EXTRACT_STATIC         = YES
+
+ALIASES               += Gromacs=GROMACS
+ALIASES               += linktodevmanual{2}="<A HREF=\"../../dev-manual/\1.html\">\2</A>"
+ALIASES               += linktodevmanual{3}="<A HREF=\"../../dev-manual/\1.html#\2\">\3</A>"
+
+DOT_IMAGE_FORMAT       = svg
+DOT_MULTI_TARGETS      = YES
+# According to Doxygen docs, this is required for svg support on IE
+HTML_FILE_EXTENSION    = .xhtml
+
+OUTPUT_DIRECTORY       = /home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/docs/html/doxygen

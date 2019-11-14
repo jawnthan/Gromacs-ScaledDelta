@@ -1,0 +1,14 @@
+# Target labels
+ fftwBuild
+# Source files and their labels
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/CMakeFiles/fftwBuild
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/CMakeFiles/fftwBuild.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/CMakeFiles/fftwBuild-complete.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-install.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-mkdir.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-download.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-update.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-patch.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-configure.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-build.rule
+/home/mi/johnwhittake/software/gromacs-5.1-lt_scaledDelta/build/src/contrib/fftw/fftwBuild-prefix/src/fftwBuild-stamp/fftwBuild-pre-download.rule
