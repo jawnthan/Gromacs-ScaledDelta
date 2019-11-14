@@ -79,10 +79,18 @@ typedef struct {
     double b;
     double c;
     double d;
+    double gdt2;
+    double eph2;
+    double emh2;
+    double em2;
+    double b2;
+    double c2;
+    double d2;
 } gmx_sd_const_t;
 
 typedef struct {
     real V;
+    real V2;
     real X;
     real Yv;
     real Yx;
@@ -483,19 +491,28 @@ static gmx_stochd_t *init_stochd(t_inputrec *ir)
         {
             if (ir->opts.tau_t[n] > 0)
             {
-                sdc[n].gdt = ir->delta_t/ir->opts.tau_t[n];
-                sdc[n].eph = exp(sdc[n].gdt/2);
-                sdc[n].emh = exp(-sdc[n].gdt/2);
-                sdc[n].em  = exp(-sdc[n].gdt);
+                sdc[n].gdt  = ir->delta_t/ir->opts.tau_t[n];
+                sdc[n].eph  = exp(sdc[n].gdt/2);
+                sdc[n].emh  = exp(-sdc[n].gdt/2);
+                sdc[n].em   = exp(-sdc[n].gdt);
+                sdc[n].gdt2 = ir->delta_t/(ir->opts.tau_t[n]*1); // here is where we scale the tau_t factor
+                sdc[n].eph2 = exp(sdc[n].gdt2/2);
+                sdc[n].emh2 = exp(-sdc[n].gdt2/2);
+                sdc[n].em2  = exp(-sdc[n].gdt2);
             }
             else
             {
                 /* No friction and noise on this group */
-                sdc[n].gdt = 0;
-                sdc[n].eph = 1;
-                sdc[n].emh = 1;
-                sdc[n].em  = 1;
+                sdc[n].gdt  = 0;
+                sdc[n].eph  = 1;
+                sdc[n].emh  = 1;
+                sdc[n].em   = 1;
+                sdc[n].gdt2 = 0;
+                sdc[n].eph2 = 1;
+                sdc[n].emh2 = 1;
+                sdc[n].em2  = 1;
             }
+	    /* the below parts are not changed because they do not affect sd1 integrator */
             if (sdc[n].gdt >= 0.05)
             {
                 sdc[n].b = sdc[n].gdt*(sdc[n].eph*sdc[n].eph - 1)
@@ -605,7 +622,8 @@ static void do_update_sd1(gmx_stochd_t *sd,
     {
         kT = BOLTZ*ref_t[n];
         /* The mass is encounted for later, since this differs per atom */
-        sig[n].V  = sqrt(kT*(1 - sdc[n].em*sdc[n].em));
+        sig[n].V   = sqrt(kT*(1 - sdc[n].em*sdc[n].em));
+        sig[n].V2  = sqrt(kT*(1 - sdc[n].em2*sdc[n].em2));
     }
 
     if (!bDoConstr)
@@ -681,7 +699,7 @@ static void do_update_sd1(gmx_stochd_t *sd,
                 {
 		    real sd_V, vn, fn;
                    
-                    sd_V         = ism*sig[gt].V*rnd[d];
+                    sd_V         = ism*sig[gt].V2*rnd[d];
                     fn           = f[n][d];
 
                     if (fabs(fn)>fc) 
@@ -691,7 +709,7 @@ static void do_update_sd1(gmx_stochd_t *sd,
                        }
                     
 		    vn           = v[n][d] + (invmass[n]*fn + accel[ga][d])*dt;
-                    v[n][d]      = vn*sdc[gt].em + sd_V;
+                    v[n][d]      = vn*sdc[gt].em2 + sd_V;
                     /* Here we include half of the friction+noise
                      * update of v into the integration of x.
                      */
